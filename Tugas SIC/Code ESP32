@@ -6,9 +6,9 @@
 
 MQ135 gasSensor = MQ135(MQ135_PIN);
 
-const char* ssid = ""; 
-const char* password = ""; 
-const char* serverName = "";
+const char* ssid = "Vitiarium"; 
+const char* password = "Allium Sativa21"; 
+const char* serverName = "http://192.168.99.22:5000/sensor/data";
 
 void setup() {
   Serial.begin(115200);
