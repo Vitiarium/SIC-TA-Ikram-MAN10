@@ -56,4 +56,4 @@ void loop() {
   }
 
   delay(500); // Kirim data setiap 1 detik
-}/
+}
