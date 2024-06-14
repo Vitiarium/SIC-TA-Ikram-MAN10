@@ -1,3 +1,7 @@
+#IKRAM UNGGUL ATMAJA
+#MAN 10 JAKARTA
+#TUGAS SIC
+
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 
