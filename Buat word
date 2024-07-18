@@ -1,0 +1,41 @@
+Option Explicit
+
+Const FOLDER As String = "...."
+Const SUMBER As String = "...."
+
+Sub MailMergeToIndPDF()
+Dim MainDoc As Document, TargetDoc As Document
+Dim dbPath As String
+Dim recordNumber As Long, totalRecord As Long
+
+Set MainDoc = ActiveDocument
+With MainDoc.MailMerge
+    
+        .OpenDataSource Name:=SUMBER, sqlstatement:="SELECT * FROM [Sheet1$]"
+            
+        totalRecord = .DataSource.RecordCount
+
+        For recordNumber = 1 To totalRecord
+        
+            With .DataSource
+                .ActiveRecord = recordNumber
+                .FirstRecord = recordNumber
+                .LastRecord = recordNumber
+            End With
+
+            On Error Resume Next
+            .Destination = wdSendToNewDocument
+            .Execute False
+            
+            Set TargetDoc = ActiveDocument
+
+            TargetDoc.ExportAsFixedFormat FOLDER & .DataSource.DataFields("NAMA").Value & ".pdf", exportformat:=wdExportFormatPDF
+            TargetDoc.Close False
+            Set TargetDoc = Nothing
+        Next recordNumber
+End With
+    On Error Resume Next
+    Kill SIMPAN_DI & "*.docx"
+    On Error GoTo 0
+Set MainDoc = Nothing
+End Sub
